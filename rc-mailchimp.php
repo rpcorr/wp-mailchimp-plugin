@@ -35,3 +35,15 @@ function rcMC_set_default_options(){
 		}
 	}
 }
+
+// Register a function to be called when WordPress is building the administration pages menu
+add_action( 'admin_menu',  'rcMC_settings_menu' );
+
+// Implement the rcMC_settings_menu function.  MailChimp menu will be a submenu of Settings
+function rcMC_settings_menu() {
+   
+    global $options_page;
+    
+    $options_page = add_options_page( 'MailChimp Configuration', 'RC MailChimp', 'manage_options',
+                                      'rcMC-mc', 'rcMC_config_page' ); 
+}
