@@ -90,12 +90,19 @@ function rcMC_config_page() {
                 <div style="margin-top:15px;">
                     <label for="api_key" style="display:inline-block; width:50px;"><strong>API Key:</strong></label>
                     <input type="text" name="api_key" size="40" maxlength="37" id="api_key" />
-                    <br/>
+                    <br />
                     <label for="list_id" style="display:inline-block; width:50px;"><strong>List ID:</strong></label>
                     <input type="text" name="api_id" size="9" maxlength="10" id="list_id" />
                 </div>
             </li>
 
+            <li>
+                <p>Would you like to collect the subscriber's name?
+                    <input type="radio" name="display_name_field" value="Yes" checked="checked" /> Yes&nbsp;&nbsp;
+                    <input type="radio" name="display_name_field" value="No" /> No</p>
+            </li>
+
+            <li>Add the following shortcode into a page or post: <strong>[rcMC-add-user-form]</strong></li>
         </ol>
     </form>
 </div>
