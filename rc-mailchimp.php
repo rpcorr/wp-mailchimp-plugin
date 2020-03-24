@@ -105,8 +105,8 @@ function rcMC_config_page() {
             <li>Add the following shortcode into a page or post: <strong>[rcMC-add-user-form]</strong></li>
         </ol>
 
-        <input type="submit" value="Submit" />
-
+        <p class="submit"><input type="submit" name="submit" id="submit" class="button-primary" value="Save Changes" />
+        </p>
     </form>
 </div>
 <?php
