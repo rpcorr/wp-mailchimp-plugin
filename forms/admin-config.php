@@ -49,9 +49,12 @@ else if ($mcListExist['status'] != '404') { ?>
     </p>
 </div>
 <?php }
- } elseif ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] != '1' ) { ?>
+ } 
+ // API Key nor the List id were provided
+ elseif ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] != '1' ) { ?>
 <div id='message' class='error fade'>
-    <p><strong>Something went wrong. Settings were not saved.</strong></p>
+    <p><strong>Uh oh! It looks as if you have not supplied an API Key nor a List ID</strong><br />
+        Please provide the API key and a subscriber list id.</p>
 </div>
 <?php  } 
 
