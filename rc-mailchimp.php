@@ -68,3 +68,17 @@ function rcMC_config_page() {
 </div>
 <?php
 }
+
+// Register a function to handle the submission of the configurations form
+add_action( 'admin_init', 'rcMC_admin_init' );
+
+function rcMC_admin_init() {
+    add_action( 'admin_post_save_rcMC_options' , 'process_rcMC_options' );
+ }
+
+ function process_rcMC_options() {
+
+    // redirect back to MailChimp configuration page with a message.
+    wp_redirect( add_query_arg( array( 'page' => 'rcMC-mc', 'message' => '1'), admin_url( 'options-general.php' ) ));   
+    exit;
+ }
