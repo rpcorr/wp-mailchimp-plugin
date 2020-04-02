@@ -8,9 +8,20 @@
     $mc = new mcMaintenance();
 
    $mcListExist = $mc->getSpecificList(esc_html( $options['list_id'] ) );
-?>
-<?php if ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == '1' ) { 
+   
+    // checks to see if plugin is arleady connected to a MailChimp Account
+    if ( !isset( $_GET[ 'message' ]) && $mcListExist['id'] !="" ) { 
+    ?>
+<div id='message' class='updated fade'>
+    <p><strong>Hooray! You are already connected to a subscriber list within your MailChimp Account</strong></p>
+</div>
+<?php 
+    }
+   
+   // checks to see if form has been submitted
+   if ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == '1' ) { 
     
+    // invalid API Key
     if ($mcListExist['title'] === 'API Key Invalid') { ?>
 <div id='message' class='error fade'>
     <p><strong>Hmmm! Looks like there was a problem connecting to your MailChimp Account</strong><br />Please make sure
@@ -18,12 +29,19 @@
     </p>
 </div>
 <?php }
+
+// checks to see if plugin is connected to a MailChimp Account
 else if ($mcListExist['status'] != '404') { ?>
 <div id='message' class='updated fade'>
     <p><strong>Hooray! You are now connected to a subscriber list within your MailChimp Account</strong></p>
 </div>
 <?php
-    } else { ?>
+    } 
+    
+    // it is known that plugin is connected to a MailChimp Account at this point;
+    // but the plugin is not connected to a list
+    else { ?>
+
 <div id='message' class='error fade'>
     <p><strong>Hmmm! Looks like you are connected to your MailChimp account. Unfortunately, there was a problem
             connecting to a list within your MailChimp Account.</strong><br />Please make sure your subscriber list id
@@ -37,8 +55,7 @@ else if ($mcListExist['status'] != '404') { ?>
 </div>
 <?php  } 
 
-//assign db api key and list id to variables -->
-            
+//assign db api key and list id to variables -->        
 if (esc_html( $options[ 'api_key' ] ) == "0000000000000000000000000000000000000" ) {
     $api_key = "";
 } else {
