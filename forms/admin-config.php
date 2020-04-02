@@ -39,6 +39,10 @@
 
             <input type="hidden" name="action" value="save_rcMC_options" />
 
+            <!--add security with a hidden referrer field -->
+            <?php wp_nonce_field('rcMC'); ?>
+
+
             <div style="margin-top:15px;">
                 <label for="api_key" style="display:inline-block; width:50px;"><strong>API Key:</strong></label>
                 <input type="text" name="api_key" size="40" maxlength="37" id="api_key" />

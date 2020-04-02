@@ -78,6 +78,9 @@ function rcMC_admin_init() {
 
  function process_rcMC_options() {
 
+    // Check that nonce field created in configuration form is present
+    check_admin_referer( "rcMC" );
+
     //retrieve form values
     $api_key = $_POST['api_key'];
     $list_id = $_POST['list_id'];
@@ -91,6 +94,6 @@ function rcMC_admin_init() {
     }
 
     // redirect back to MailChimp configuration page with a message.
-    wp_redirect( add_query_arg( array( 'page' => 'rcMC-mc', 'message' => $message, 'api_key' => $api_key, 'list_id' => $list_id), admin_url( 'options-general.php' ) ));   
+    wp_redirect( add_query_arg( array( 'page' => 'rcMC-mc', 'message' => $message), admin_url( 'options-general.php' ) ));   
     exit;
  }
