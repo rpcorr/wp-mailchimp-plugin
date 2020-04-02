@@ -78,7 +78,19 @@ function rcMC_admin_init() {
 
  function process_rcMC_options() {
 
+    //retrieve form values
+    $api_key = $_POST['api_key'];
+    $list_id = $_POST['list_id'];
+
+    //check if form values are good for submission
+    if (trim($api_key) === "" || trim($api_key) === null  || trim($list_id) === "" || trim($list_id) === null) {
+        $message = '2';
+    } else {
+        //Store updated options array to database
+        $message = '1';
+    }
+
     // redirect back to MailChimp configuration page with a message.
-    wp_redirect( add_query_arg( array( 'page' => 'rcMC-mc', 'message' => '1'), admin_url( 'options-general.php' ) ));   
+    wp_redirect( add_query_arg( array( 'page' => 'rcMC-mc', 'message' => $message, 'api_key' => $api_key, 'list_id' => $list_id), admin_url( 'options-general.php' ) ));   
     exit;
  }

@@ -1,4 +1,16 @@
-<form method="post" action="admin-post.php">
+<!-- Code to display confirmation messages when settings saved or reset -->
+<?php if ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == '1' ) { ?>
+
+<div id='message' class='updated fade'>
+    <p><strong>Settings Saved</strong></p>
+</div>
+<?php } elseif ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] != '1' ) { ?>
+<div id='message' class='error fade'>
+    <p><strong>Something went wrong. Settings were not saved.</strong></p>
+</div>
+<?php  } ?>
+
+<form method="post" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>">
 
     <ol>
         <li>
@@ -32,7 +44,7 @@
                 <input type="text" name="api_key" size="40" maxlength="37" id="api_key" />
                 <br />
                 <label for="list_id" style="display:inline-block; width:50px;"><strong>List ID:</strong></label>
-                <input type="text" name="api_id" size="9" maxlength="10" id="list_id" />
+                <input type="text" name="list_id" size="9" maxlength="10" id="list_id" />
             </div>
         </li>
 
