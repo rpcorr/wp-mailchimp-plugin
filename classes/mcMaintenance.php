@@ -10,15 +10,16 @@ class mcMaintenance {
 		//Retrieve plugin configuration options from database
 		$options = get_option( 'rcMC_options' );
 		
-		//$key = 'f13265bfdafd2de7e09cf0ac8252cb7f-us14';
-		$key = esc_html( $options[ 'api_key' ] );
-		return $key;
+		//return API key
+		return esc_html( $options[ 'api_key' ] );
 	}
 
     public function getSpecificList($listID) { 
+
+        // create a MailChimp object
         $mc = new MailChimp($this->getAuthKey());
         
-        $specificList = $mc->get('/lists/' . $listID . '');
-        return $specificList;
+        // return a specific list
+        return $mc->get('/lists/' . $listID . '');
     }
 }
