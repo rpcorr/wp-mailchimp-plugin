@@ -89,7 +89,39 @@ function rcMC_admin_init() {
     if (trim($api_key) === "" || trim($api_key) === null  || trim($list_id) === "" || trim($list_id) === null) {
         $message = '2';
     } else {
+        
+        //Cycle through all text form fields and store their values in the options array
+        foreach ( array( 'api_key' ) as $option_name ) {
+            if ( isset( $_POST[$option_name] ) ) {
+                
+                //check to see if field name is empty if so reset to inital value
+                if ( sanitize_text_field( trim( $_POST[$option_name] ) ) == "" ) {
+                    $options[$option_name] = "0000000000000000000000000000000000000";
+                } else {
+                    $options[$option_name] = sanitize_text_field( $_POST[$option_name] );	
+                }
+            }
+        }
+    
+        foreach ( array( 'list_id' ) as $option_name ) {
+            if ( isset( $_POST[$option_name] ) ) {
+                //check to see if field name is empty if so reset to inital value
+                if ( sanitize_text_field( trim( $_POST[$option_name] ) ) == "" ) {
+                    $options[$option_name] = "0000000000";
+                } else {
+                    $options[$option_name] = sanitize_text_field( $_POST[$option_name] );	
+                }
+            }
+        }
+    
+        foreach ( array( 'display_name_field' ) as $option_name ) {
+            if ( isset( $_POST[$option_name] ) ) {
+                $options[$option_name] = esc_html( $_POST[$option_name] );
+            }
+        }
+
         //Store updated options array to database
+        update_option( 'rcMC_options', $options );
         $message = '1';
     }
 
