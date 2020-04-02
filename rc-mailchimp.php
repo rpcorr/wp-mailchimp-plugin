@@ -84,6 +84,7 @@ function rcMC_admin_init() {
 
     //check if form values are good for submission
     if (trim($api_key) === "" || trim($api_key) === null  || trim($list_id) === "" || trim($list_id) === null) {
+        // form is incomplete
         $message = '2';
     } else {
         

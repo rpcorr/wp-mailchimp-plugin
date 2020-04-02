@@ -1,17 +1,41 @@
 <!-- Code to display confirmation messages when settings saved or reset -->
-<?php if ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == '1' ) { ?>
 
-<div id='message' class='updated fade'>
-    <p><strong>Settings Saved</strong></p>
+<?php
+    //Retrieve plugin configuration options from database
+    $options = get_option( 'rcMC_options' );
+
+    //check if provided api key and list id are correct
+    $mc = new mcMaintenance();
+
+   $mcListExist = $mc->getSpecificList(esc_html( $options['list_id'] ) );
+?>
+<?php if ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == '1' ) { 
+    
+    if ($mcListExist['title'] === 'API Key Invalid') { ?>
+<div id='message' class='error fade'>
+    <p><strong>Hmmm! Looks like there was a problem connecting to your MailChimp Account</strong><br />Please make sure
+        your API key is correct
+    </p>
 </div>
-<?php } elseif ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] != '1' ) { ?>
+<?php }
+else if ($mcListExist['status'] != '404') { ?>
+<div id='message' class='updated fade'>
+    <p><strong>Hooray! You are now connected to a subscriber list within your MailChimp Account</strong></p>
+</div>
+<?php
+    } else { ?>
+<div id='message' class='error fade'>
+    <p><strong>Hmmm! Looks like you are connected to your MailChimp account. Unfortunately, there was a problem
+            connecting to a list within your MailChimp Account.</strong><br />Please make sure your subscriber list id
+        is correct.
+    </p>
+</div>
+<?php }
+ } elseif ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] != '1' ) { ?>
 <div id='message' class='error fade'>
     <p><strong>Something went wrong. Settings were not saved.</strong></p>
 </div>
 <?php  } 
-
-//Retrieve plugin configuration options from database
-$options = get_option( 'rcMC_options' );
 
 //assign db api key and list id to variables -->
             
@@ -79,7 +103,8 @@ if (esc_html( $options[ 'list_id' ] ) == "0000000000" ) {
                     <?php if ( $options[ 'display_name_field' ]  == "Yes" ) { echo 'checked="checked"'; } ?> />
                 Yes&nbsp;&nbsp;
                 <input type="radio" name="display_name_field" value="No"
-                    <?php if ( $options[ 'display_name_field' ]  == "No" ) { echo 'checked="checked"'; } ?> /> No</p>
+                    <?php if ( $options[ 'display_name_field' ]  == "No" ) { echo 'checked="checked"'; } ?> /> No
+            </p>
         </li>
 
         <li>Add the following shortcode into a page or post: <strong>[rcMC-add-user-form]</strong></li>
