@@ -8,7 +8,26 @@
 <div id='message' class='error fade'>
     <p><strong>Something went wrong. Settings were not saved.</strong></p>
 </div>
-<?php  } ?>
+<?php  } 
+
+//Retrieve plugin configuration options from database
+$options = get_option( 'rcMC_options' );
+
+//assign db api key and list id to variables -->
+            
+if (esc_html( $options[ 'api_key' ] ) == "0000000000000000000000000000000000000" ) {
+    $api_key = "";
+} else {
+    $api_key = esc_html( $options[ 'api_key' ] );
+}
+
+if (esc_html( $options[ 'list_id' ] ) == "0000000000" ) {
+    $list_id = "";
+} else {
+    $list_id = esc_html( $options[ 'list_id' ] );
+}
+
+?>
 
 <form method="post" action="<?php echo esc_url( admin_url('admin-post.php') ); ?>">
 
@@ -45,17 +64,22 @@
 
             <div style="margin-top:15px;">
                 <label for="api_key" style="display:inline-block; width:50px;"><strong>API Key:</strong></label>
-                <input type="text" name="api_key" size="40" maxlength="37" id="api_key" />
+                <input type="text" name="api_key" size="40" maxlength="37" id="api_key"
+                    value="<?php echo $api_key; ?>" />
                 <br />
                 <label for="list_id" style="display:inline-block; width:50px;"><strong>List ID:</strong></label>
-                <input type="text" name="list_id" size="9" maxlength="10" id="list_id" />
+                <input type="text" name="list_id" size="9" maxlength="10" id="list_id"
+                    value="<?php echo $list_id; ?>" />
             </div>
         </li>
 
         <li>
             <p>Would you like to collect the subscriber's name?
-                <input type="radio" name="display_name_field" value="Yes" checked="checked" /> Yes&nbsp;&nbsp;
-                <input type="radio" name="display_name_field" value="No" /> No</p>
+                <input type="radio" name="display_name_field" value="Yes"
+                    <?php if ( $options[ 'display_name_field' ]  == "Yes" ) { echo 'checked="checked"'; } ?> />
+                Yes&nbsp;&nbsp;
+                <input type="radio" name="display_name_field" value="No"
+                    <?php if ( $options[ 'display_name_field' ]  == "No" ) { echo 'checked="checked"'; } ?> /> No</p>
         </li>
 
         <li>Add the following shortcode into a page or post: <strong>[rcMC-add-user-form]</strong></li>

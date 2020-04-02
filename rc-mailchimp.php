@@ -50,9 +50,6 @@ function rcMC_settings_menu() {
 
 function rcMC_config_page() {
     
-    //Retrieve plugin configuration options from database
-    $options = get_option( 'rcMC_options' );
-
     //Get the plugin root directory
     $pluginURL = plugin_dir_url(__FILE__);
    
