@@ -61,7 +61,6 @@ function rcMC_config_page() {
     //include admin configuration form
     require_once 'forms/admin-config.php';
     ?>
-
 </div>
 <?php
 }
