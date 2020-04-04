@@ -16,31 +16,40 @@
     <p><strong>Hooray! You are already connected to a subscriber list within your MailChimp Account</strong></p>
 </div>
 <?php 
-    }
-   
-   // checks to see if form has been submitted
-   if ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == '1' ) { 
-    
-    // invalid API Key
-    if ($mcListExist['title'] === 'API Key Invalid') { ?>
+        // displays when config page initally loads and API key and List id values are not set at 000000
+    } else if ( !isset( $_GET[ 'message' ]) && ($mcListExist['status'] === '401' ) || $mcListExist['title'] === 'API Key Invalid') { ?>
+
+<div id='message' class='error fade'>
+    <p><strong>You are currently not connected to a subscriber list with your MailChimp Account</strong><br />Please
+        make sure your API key and subscriber list id are correct.
+    </p>
+</div>
+<?php }
+
+    // checks to see if form has been submitted
+    else if ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] == '1' ) {
+
+        // invalid API Key
+        if ($mcListExist['title'] === 'API Key Invalid' || $mcListExist === false) { ?>
 <div id='message' class='error fade'>
     <p><strong>Hmmm! Looks like there was a problem connecting to your MailChimp Account</strong><br />Please make sure
         your API key is correct
     </p>
 </div>
-<?php }
+<?php 
+        }
 
-// checks to see if plugin is connected to a MailChimp Account
-else if ($mcListExist['status'] != '404') { ?>
+        // checks to see if plugin is connected to a MailChimp Account
+        else if ($mcListExist['status'] != '404') { ?>
 <div id='message' class='updated fade'>
     <p><strong>Hooray! You are now connected to a subscriber list within your MailChimp Account</strong></p>
 </div>
 <?php
-    } 
-    
-    // it is known that plugin is connected to a MailChimp Account at this point;
-    // but the plugin is not connected to a list
-    else { ?>
+        } 
+        
+        // it is known that plugin is connected to a MailChimp Account at this point;
+        // but the plugin is not connected to a list
+        else { ?>
 
 <div id='message' class='error fade'>
     <p><strong>Hmmm! Looks like you are connected to your MailChimp account. Unfortunately, there was a problem
@@ -48,15 +57,16 @@ else if ($mcListExist['status'] != '404') { ?>
         is correct.
     </p>
 </div>
-<?php }
- } 
- // API Key nor the List id were provided
- elseif ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] != '1' ) { ?>
+<?php   }
+    } 
+    
+    // Form was submitted, but API Key nor the List id were provided
+    elseif ( isset( $_GET[ 'message' ] ) && $_GET[ 'message' ] != '1' ) { ?>
 <div id='message' class='error fade'>
     <p><strong>Uh oh! It looks as if you have not supplied an API Key nor a List ID</strong><br />
         Please provide the API key and a subscriber list id.</p>
 </div>
-<?php  } 
+<?php } 
 
 //assign db api key and list id to variables -->        
 if (esc_html( $options[ 'api_key' ] ) == "0000000000000000000000000000000000000" ) {
