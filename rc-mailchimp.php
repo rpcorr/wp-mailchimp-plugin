@@ -126,3 +126,6 @@ function rcMC_admin_init() {
     wp_redirect( add_query_arg( array( 'page' => 'rcMC-mc', 'message' => $message), admin_url( 'options-general.php' ) ));   
     exit;
  }
+
+ //include registration form
+require_once 'forms/registration-form.php';
