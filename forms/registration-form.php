@@ -1,5 +1,16 @@
 <?php
 
+// add an ajax hook to the registration form that is called when AJAX
+// requests are received from public or logged in users with
+// action variable set to register_user
+add_action( 'wp_ajax_register_user', 'register_user');
+add_action( 'wp_ajax_nopriv_register_user', 'register_user');
+
+// handles Ajax post requests
+function register_user() { ?>
+
+<?php }
+
 add_shortcode( 'registration_form', 'registration_form' );
 
 function registration_form() { ?>
@@ -25,6 +36,7 @@ function registration_form() { ?>
         <label for="acknowledge">I have read and understand the <a href="#">terms of use</a> and <a href="#">privacy
                 policy</a></label>
     </div>
+    <input type="hidden" name="action" value="register_user">
     <input type="submit" name="submit" id="submit" value="Sign up">
 </form>
 <?php  }
