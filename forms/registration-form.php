@@ -1,5 +1,14 @@
 <?php
 
+// add custom jquery script to the registration form
+add_action('wp_enqueue_scripts', 'rcMC_enqueue_jquery');
+
+function rcMC_enqueue_jquery() {
+    $params = array ( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
+    wp_enqueue_script( 'rcMC_ajax_handle', plugin_dir_url( __FILE__ ) . 'js/ajax-handler.js', array( 'jquery' ));               
+    wp_localize_script( 'rcMC_ajax_handle', 'params', $params );    
+}
+
 // add an ajax hook to the registration form that is called when AJAX
 // requests are received from public or logged in users with
 // action variable set to register_user
