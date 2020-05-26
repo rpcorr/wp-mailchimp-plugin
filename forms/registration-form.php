@@ -47,5 +47,10 @@ function registration_form() { ?>
     </div>
     <input type="hidden" name="action" value="register_user">
     <input type="submit" name="submit" id="submit" value="Sign up">
+    <div id="wait" style="margin-top:15px;">
+        <p><img src="<?php echo plugin_dir_url( __DIR__ ) ?>images/ajax-loader.gif" alt="Form is processing..."
+                title="Form is processing..." width="16" height="16" border="0" style="margin-right:5px;">Form is
+            currently processing...please wait.</p>
+    </div>
 </form>
 <?php  }
