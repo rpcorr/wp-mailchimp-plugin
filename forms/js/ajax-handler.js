@@ -12,5 +12,9 @@ jQuery(document).ready(function ($) {
 
     // show the spinner
     jQuery('#wait').css('display', 'block');
+
+    // serialize the form data
+    var ajax_form_data = $('#registrationForm').serialize();
+
   });
 });
