@@ -6,4 +6,8 @@ jQuery(document).ready(function ($) {
    */
 
   jQuery('#wait').css('display', 'none'); // hide the spinner
+
+  jQuery('#registration-form').submit(function (event) {
+    event.preventDefault(); // Prevent the default form submit.
+  });
 });
