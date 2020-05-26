@@ -16,5 +16,7 @@ jQuery(document).ready(function ($) {
     // serialize the form data
     var ajax_form_data = $('#registrationForm').serialize();
 
+    // add own ajax check as X-Requested-With is not always reliable
+    ajax_form_data = ajax_form_data + '&ajaxrequest=true&submit=Sign+Up';
   });
 });
