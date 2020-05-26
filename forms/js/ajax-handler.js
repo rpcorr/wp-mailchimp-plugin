@@ -5,4 +5,5 @@ jQuery(document).ready(function ($) {
    * The file is enqueued from forms/registration-form.php.
    */
 
+  jQuery('#wait').css('display', 'none'); // hide the spinner
 });
