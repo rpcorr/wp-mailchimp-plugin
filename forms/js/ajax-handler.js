@@ -9,5 +9,8 @@ jQuery(document).ready(function ($) {
 
   jQuery('#registration-form').submit(function (event) {
     event.preventDefault(); // Prevent the default form submit.
+
+    // show the spinner
+    jQuery('#wait').css('display', 'block');
   });
 });
