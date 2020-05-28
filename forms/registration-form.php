@@ -24,6 +24,17 @@ add_shortcode( 'registration_form', 'registration_form' );
 
 function registration_form() { ?>
 
+
+<?php 
+    // create a nonce variable for security purposes
+    $nonce = wp_create_nonce( 'register_ajax' ); 
+?>
+<script type="text/javascript">
+// assign PHP nonce variable to a javascript variable
+// so it can be read in the ajax call
+var nonce = "<?= $nonce ?>";
+</script>
+
 <form id="registration-form" enctype="multipart/form-data" method="post"
     action="<?php echo admin_url('admin-ajax.php'); ?>">
     <h2>Be the first to know!</h2>
