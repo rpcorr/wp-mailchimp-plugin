@@ -26,10 +26,15 @@ jQuery(function () {
       e.stopPropagation();
       console.log('form button has been clicked');
       console.log('ajax_url is ' + ajax_url);
+      console.log('nonce is ' + nonce);
 
       jQuery.ajax({
         type: "POST",
-        url: ajax_url
+        url: ajax_url,
+        data: {
+          action: "ch8bt_buglist_ajax",
+          _ajax_nonce: nonce
+        }
       });
 
 
