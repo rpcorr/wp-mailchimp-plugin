@@ -46,7 +46,11 @@ jQuery(function () {
         url: ajax_url,
         data: {
           action: "ch8bt_buglist_ajax",
-          _ajax_nonce: nonce
+          _ajax_nonce: nonce,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          acknowledge: acknowledge
         }
       });
 
