@@ -28,6 +28,19 @@ jQuery(function () {
       console.log('ajax_url is ' + ajax_url);
       console.log('nonce is ' + nonce);
 
+      //assign input data to variables
+      var firstName = jQuery('#firstName').val();
+      var lastName = jQuery('#lastName').val();
+      var email = jQuery('#email').val();
+      var acknowledge = jQuery('#acknowledge').prop('checked') ? jQuery('#acknowledge').val() : '0';
+      var submit = jQuery('#submit').val();
+
+      console.log('firstName is: ' + firstName);
+      console.log('lastName is: ' + lastName);
+      console.log('email is: ' + email);
+      console.log('acknowledge is: ' + acknowledge);
+      console.log('submit is: ' + submit);
+
       jQuery.ajax({
         type: "POST",
         url: ajax_url,
