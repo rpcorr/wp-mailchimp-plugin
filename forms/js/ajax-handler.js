@@ -16,7 +16,7 @@ jQuery(function () {
     });
 
     jQuery(document).ajaxComplete(function () {
-      console.log('ajax has completed');
+      //console.log('ajax has completed');
       jQuery("#wait").css("display", "none");
     });
 
@@ -24,9 +24,9 @@ jQuery(function () {
     jQuery('#registration-form').on('submit', function (e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('form button has been clicked');
-      console.log('ajax_url is ' + ajax_url);
-      console.log('nonce is ' + nonce);
+      //console.log('form button has been clicked');
+      //console.log('ajax_url is ' + ajax_url);
+      //console.log('nonce is ' + nonce);
 
       //assign input data to variables
       var firstName = jQuery('#firstName').val();
@@ -35,11 +35,11 @@ jQuery(function () {
       var acknowledge = jQuery('#acknowledge').prop('checked') ? jQuery('#acknowledge').val() : '0';
       var submit = jQuery('#submit').val();
 
-      console.log('firstName is: ' + firstName);
-      console.log('lastName is: ' + lastName);
-      console.log('email is: ' + email);
-      console.log('acknowledge is: ' + acknowledge);
-      console.log('submit is: ' + submit);
+      //console.log('firstName is: ' + firstName);
+      //console.log('lastName is: ' + lastName);
+      //console.log('email is: ' + email);
+      //console.log('acknowledge is: ' + acknowledge);
+      //console.log('submit is: ' + submit);
 
       jQuery.ajax({
         type: "POST",
@@ -51,6 +51,11 @@ jQuery(function () {
           lastName: lastName,
           email: email,
           acknowledge: acknowledge
+        },
+        cache: false,
+        success: function (data) {
+          jQuery('.form-results').html(data);
+          return false;
         }
       });
 
