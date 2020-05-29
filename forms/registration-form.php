@@ -1,29 +1,8 @@
 <?php
 
-// add custom jquery script to the registration form
-add_action('wp_enqueue_scripts', 'rcMC_enqueue_jquery');
-
-function rcMC_enqueue_jquery() {
-    $params = array ( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
-    wp_enqueue_script( 'rcMC_ajax_handle', plugin_dir_url( __FILE__ ) . 'js/ajax-handler.js', array( 'jquery' ));               
-    wp_localize_script( 'rcMC_ajax_handle', 'params', $params );    
-}
-
-// add an ajax hook to the registration form that is called when AJAX
-// requests are received from public or logged in users with
-// action variable set to register_user
-add_action( 'wp_ajax_register_user', 'register_user');
-add_action( 'wp_ajax_nopriv_register_user', 'register_user');
-
-// handles Ajax post requests
-function register_user() { ?>
-
-<?php }
-
 add_shortcode( 'registration_form', 'registration_form' );
 
 function registration_form() { ?>
-
 
 <?php 
     // create a nonce variable for security purposes
@@ -34,9 +13,10 @@ function registration_form() { ?>
 // so it can be read in the ajax call
 var nonce = "<?= $nonce ?>";
 </script>
-
-<form id="registration-form" enctype="multipart/form-data" method="post"
-    action="<?php echo admin_url('admin-ajax.php'); ?>">
+<div class="form-results">
+    <p>hello</p>
+</div>
+<form method="get" id="registration-form">
     <h2>Be the first to know!</h2>
     <p>Join our mailing list to receive the latest news.</p>
     <div style="margin-bottom:15px;">
@@ -65,3 +45,44 @@ var nonce = "<?= $nonce ?>";
     </div>
 </form>
 <?php  }
+
+// add custom jquery script to the registration form
+add_action('wp_enqueue_scripts', 'rcMC_enqueue_jquery');
+
+function rcMC_enqueue_jquery() {
+    $params = array ( 'ajaxurl' => admin_url( 'admin-ajax.php' ) );
+    wp_enqueue_script( 'rcMC_ajax_handle', plugin_dir_url( __FILE__ ) . 'js/ajax-handler.js', array( 'jquery' ));               
+    wp_localize_script( 'rcMC_ajax_handle', 'params', $params );    
+}
+
+// add an ajax hook to the registration form that is called when AJAX
+// requests are received from public or logged in users with
+// action variable set to register_user
+add_action( 'wp_ajax_register_user', 'rcMC_register_user');
+add_action( 'wp_ajax_nopriv_register_user', 'rcMC_register_user');
+
+// handles Ajax post requests
+function rcMC_register_user() { 
+    check_ajax_referer( 'register_ajax' );
+
+    if ( isset( $_POST['firstName']) && trim($_POST['firstName']) != "" ) {
+        
+        $output = "firstName is present";
+        
+    } else {
+        
+        $output = "firstName is NOT present";
+    }
+
+    echo $output;
+
+    die();
+}
+
+// register a function to be called when scripts are being queued up
+add_action( 'wp_enqueue_scripts', 'rcMC_load_jquery' );
+
+// implement rcMC_load_jquery
+function rcMC_load_jquery() {
+    wp_enqueue_script( 'jquery' );
+}
