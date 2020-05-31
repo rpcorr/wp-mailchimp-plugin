@@ -59,8 +59,8 @@ function rcMC_registration_form() {
     $output .= '<input type="submit" name="submit" id="submit" value="Sign up">';
     $output .= '</form><br />';
 
-    $output .= '<a class="show_closed_bugs">';
-    $output .= 'Show closed bugs';
+    $output .= '<a class="get_submission_results">';
+    $output .= 'Get submission results';
     $output .= '</a>';
 
     $output .= '<div class="show_submission_results">'; 
@@ -110,7 +110,7 @@ function rcMC_registration_form() {
                '};';
                
     $output .= 'jQuery( document ).ready( function () {';
-    $output .= 'jQuery(".show_closed_bugs").click( function()
+    $output .= 'jQuery(".get_submission_results").click( function()
                                         { replacecontent( 1 ); } ';
     $output .= ')});';
     $output .= '</script>';
