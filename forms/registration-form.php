@@ -87,5 +87,23 @@ admin - ajax.php ' ); ?>';
 // add an ajax hook to the registration form that is called when AJAX
 // requests are received from public or logged in users with
 // action variable set to rcMC_register_user
-add_action( 'wp_ajax_rcMC_register_user', 'rcMC_register_user');
-add_action( 'wp_ajax_nopriv_rcMC_register_user', 'rcMC_register_user');
+add_action( 'wp_ajax_rcMC_register_user', 'rcMC_register_user_ajax');
+add_action( 'wp_ajax_nopriv_rcMC_register_user', 'rcMC_register_user_ajax');
+
+
+// implement rcMC_register_user_ajax function
+function rcMC_register_user_ajax() {
+    check_ajax_referer( 'register_ajax' );
+
+    if ( isset( $_POST['first_name']) && trim($_POST['first_name']) !="" ) {
+
+        $first_name = "present";
+    
+    } else {
+        $first_name = "not present";
+    } 
+       
+    echo $first_name;
+
+    die();
+}
