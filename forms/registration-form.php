@@ -63,7 +63,7 @@ function rcMC_registration_form() {
     $output .= 'Show closed bugs';
     $output .= '</a>';
 
-    $output .= '<div class="bug_listing">'; 
+    $output .= '<div class="show_submission_results">'; 
     
     $output .= '<table>';
     
@@ -104,7 +104,7 @@ function rcMC_registration_form() {
                '            _ajax_nonce: "' .  $nonce . '", ' .
                '            bug_status: bug_status }, ' .
                '    success: function ( data ) {' .
-               '             jQuery(".bug_listing").html( data ); ' .
+               '             jQuery(".show_submission_results").html( data ); ' .
                '             }' .
                '    });' .
                '};';
@@ -156,7 +156,7 @@ function rcMC_buglist_ajax() {
                  $wpdb->prepare( $bug_query ), ARRAY_A );
              
             // Prepare output to be returned to AJAX requestor
-            $output = '<div class="bug_listing"><table>';
+            $output = '<div class="show_submission_results"><table>';
 
             // Check if any bugs were found
             if ( $bug_items ) {
