@@ -32,9 +32,40 @@ function registration_form() {
     $output .= '<div id="wait" style="margin-top:15px;">';
     $output .= '<p><img src="' . plugin_dir_path( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16">Form is processing...please wait.</p>';
     $output .= '</div>';
-    $output .= '</form>';
+    $output .= '</form><br />';
+
+    $output .= '<a class="submitted_data">';
+    $output .= 'Get Results';
+    $output .= '</a>';
+
+    $output .= '<div class="output_listing">'; 
+    
+    $output .= '<table>';
+
+    
     $output .= '<script type="text/javascript">';
     $output .= '    alert("hi");';
     $nonce = wp_create_nonce( 'register_ajax' );
+
+    $output .= 'function replacecontent ( first_name )' .
+               '{ jQuery.ajax( { ' .
+               '    type: "POST",' .
+               '    url: ajax_url, ' .
+               '    data: { action: "rcMC_register_ajax", ' .
+               '            _ajax_nonce: "' .  $nonce . '", ' .
+               '            first_name: first_name }, ' .
+               '    success: function ( data ) {' .
+               '             jQuery(".output_listing").html( data ); ' .
+               '             }' .
+               '    });' .
+               '};';
+               
+    $output .= 'jQuery( document ).ready( function () {';
+    $output .= 'jQuery(".submitted_data").click( function()
+                                        { replacecontent( "Ronan" ); } ';
+    $output .= ')});';
     $output .= '</script>';
+
+    // Return data prepared to replace shortcode on page/post
+    return $output;
 }
