@@ -72,3 +72,14 @@ function registration_form() {
 
 // register a function to add content to the page header
 add_action( 'wp_head', 'rcMC_declare_ajaxurl' );
+
+
+// implement rcMC_declare_ajaxurl
+function rcMC_declare_ajaxurl() { ?>
+<script type="text/javascript">
+var ajax_url = '<?php echo admin_url( '
+admin - ajax.php ' ); ?>';
+</script>
+
+<?php
+}
