@@ -107,3 +107,6 @@ function rcMC_register_user_ajax() {
 
     die();
 }
+
+// register a function to be called when scripts are being queued up
+add_action( 'wp_enqueue_scripts', 'rcMC_load_jquery' );
