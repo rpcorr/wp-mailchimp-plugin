@@ -69,3 +69,6 @@ function registration_form() {
     // Return data prepared to replace shortcode on page/post
     return $output;
 }
+
+// register a function to add content to the page header
+add_action( 'wp_head', 'rcMC_declare_ajaxurl' );
