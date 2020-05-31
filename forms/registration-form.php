@@ -35,6 +35,6 @@ function registration_form() {
     $output .= '</form>';
     $output .= '<script type="text/javascript">';
     $output .= '    alert("hi");';
-    $nonce = wp_create_nonce( 'ch8bt_ajax' );
+    $nonce = wp_create_nonce( 'register_ajax' );
     $output .= '</script>';
 }
