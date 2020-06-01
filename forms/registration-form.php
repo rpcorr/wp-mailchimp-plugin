@@ -60,7 +60,7 @@ function rcMC_registration_form() {
                '   jQuery.ajax( { ' .
                '    type: "POST",' .
                '    url: ajax_url, ' .
-               '    data: { action: "rcMC_buglist_ajax", ' .
+               '    data: { action: "rcMC_register_user_ajax", ' .
                '            _ajax_nonce: "' .  $nonce . '", ' .
                '            firstName: firstName, ' .
                '            bug_status: bug_status }, ' .
@@ -95,12 +95,12 @@ admin - ajax.php ' ); ?>';
 }
 
 // register functions that will be called when AJAX requests are received from public 
-// or logged in users with an action variable set to rcMC_buglist_ajax
-add_action( 'wp_ajax_rcMC_buglist_ajax', 'rcMC_buglist_ajax' );
-add_action( 'wp_ajax_nopriv_rcMC_buglist_ajax', 'rcMC_buglist_ajax' );
+// or logged in users with an action variable set to rcMC_register_user_ajax
+add_action( 'wp_ajax_rcMC_register_user_ajax', 'rcMC_register_user_ajax' );
+add_action( 'wp_ajax_nopriv_rcMC_register_user_ajax', 'rcMC_register_user_ajax' );
 
-// implement rcMC_buglist_ajax function
-function rcMC_buglist_ajax() {
+// implement rcMC_register_user_ajax function
+function rcMC_register_user_ajax() {
     check_ajax_referer( 'rcMC_ajax' );
 
     // Prepare output to be returned to AJAX requestor
