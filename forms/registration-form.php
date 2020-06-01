@@ -59,10 +59,6 @@ function rcMC_registration_form() {
     $output .= '<input type="button" name="submit" id="submit" class="get_submission_results" value="Sign Up" />';    
     $output .= '</form><br />';
 
-    $output .= '<a class="get_submission_results">';
-    $output .= 'Get submission results';
-    $output .= '</a>';
-
     $output .= '<div class="show_submission_results">'; 
     
     $output .= '<table>';
