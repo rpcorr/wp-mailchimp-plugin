@@ -56,7 +56,7 @@ function rcMC_registration_form() {
     $output .= '   <label for="acknowledge">I have read and understand the <a href="#">terms of use</a> and <a href="#">privacy
                 policy</a></label>';
     $output .= '</div>';
-    $output .= '<button type="button" name="submit" id="submit" class="get_submission_results">Sign Up</button>';    
+    $output .= '<input type="button" name="submit" id="submit" class="get_submission_results" value="Sign Up" />';    
     $output .= '</form><br />';
 
     $output .= '<a class="get_submission_results">';
@@ -104,12 +104,14 @@ function rcMC_registration_form() {
                ' var lastName = jQuery("#lastName").val();' . 
                ' var email = jQuery("#email").val();' .  
                ' var acknowledge = jQuery("#acknowledge").prop("checked") ? jQuery("#acknowledge").val() : "0";' .
+               ' var submit = jQuery("#submit").val();' .
                              
                // print variable to console
                ' console.log("first name is: " + firstName); ' .
                ' console.log("last name is: " + lastName); ' .
                ' console.log("email is: " + email); ' .
                ' console.log("acknowledge is: " + acknowledge); ' .
+               ' console.log("submit is: " + submit); ' .
                
                // call ajax
                '   jQuery.ajax( { ' .
