@@ -85,6 +85,11 @@ currently processing...please wait.</p>';
     $output .= 'jQuery(document).ajaxStart(function () { ' .
                '   jQuery("#wait").css("display", "block"); ' .
                '});';
+
+    // run when AJAX is completed
+    $output .= 'jQuery(document).ajaxComplete(function () { ' .
+               '   jQuery("#wait").css("display", "none"); ' .
+               '});';
     
     $output .= '});';
     $output .= '</script>';
