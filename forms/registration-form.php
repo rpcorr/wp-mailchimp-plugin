@@ -39,7 +39,7 @@ function rcMC_registration_form() {
     
     $nonce = wp_create_nonce( 'rcMC_ajax' );
     
-    $output .= 'function replacecontent ( bug_status )' .
+    $output .= 'function replaceContent ()' .
                '{ ' .
                 
                 //assign input data to variables
@@ -62,8 +62,7 @@ function rcMC_registration_form() {
                '    url: ajax_url, ' .
                '    data: { action: "rcMC_register_user_ajax", ' .
                '            _ajax_nonce: "' .  $nonce . '", ' .
-               '            firstName: firstName, ' .
-               '            bug_status: bug_status }, ' .
+               '            firstName: firstName }, ' .
                '    success: function ( data ) {' .
                '             jQuery(".show_submission_results").html( data ); ' .
                '             }' .
@@ -72,7 +71,7 @@ function rcMC_registration_form() {
                
     $output .= 'jQuery( document ).ready( function () {';
     $output .= 'jQuery(".get_submission_results").click( function()
-                                        { replacecontent( 1 ); } ';
+                                        { replaceContent(); } ';
     $output .= ')});';
     $output .= '</script>';
 
