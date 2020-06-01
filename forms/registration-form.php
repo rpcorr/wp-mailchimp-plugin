@@ -78,8 +78,15 @@ currently processing...please wait.</p>';
     $output .= 'jQuery("#wait").css("display", "none");';
     // call replaceContent function on button click
     $output .= 'jQuery(".get_submission_results").click( function()
-                                        { replaceContent(); } ';
-    $output .= ')});';
+                                        { replaceContent(); } ' .
+               ');';
+
+    // run when AJAX is poccessing
+    $output .= 'jQuery(document).ajaxStart(function () { ' .
+               '   jQuery("#wait").css("display", "block"); ' .
+               '});';
+    
+    $output .= '});';
     $output .= '</script>';
 
     // Return data prepared to replace shortcode on page/post
