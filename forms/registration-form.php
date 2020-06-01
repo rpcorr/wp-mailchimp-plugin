@@ -160,58 +160,21 @@ add_action( 'wp_ajax_nopriv_rcMC_buglist_ajax', 'rcMC_buglist_ajax' );
 function rcMC_buglist_ajax() {
     check_ajax_referer( 'rcMC_ajax' );
 
-    if ( isset( $_POST['bug_status']) && 
-         is_numeric( $_POST['bug_status'])) {
-             global $wpdb;
+    // Prepare output to be returned to AJAX requestor
+    $output = '<div class="show_submission_results">';
+    $output .= "<br/>";
+        
+        if ( isset( $_POST['firstName']) && trim($_POST['firstName']) !="") {
+            $output .= "first name is present " . $_POST['firstName'];
+        } else {
+            $output .= "first name is not present" . $_POST['firstName'];
+        }
 
-             // Prepare query to retrieve bugs from database
-             $bug_query = 'SELECT * from ' . $wpdb->get_blog_prefix();
-             $bug_query .= 'ch7_bug_data where bug_status = ';
-             $bug_query .= intval( $_POST['bug_status'] );
-             $bug_query .= ' ORDER BY bug_id DESC';
-             
-             $bug_items = $wpdb->get_results(
-                 $wpdb->prepare( $bug_query ), ARRAY_A );
-             
-            // Prepare output to be returned to AJAX requestor
-            $output = '<div class="show_submission_results"><table>';
+    $output .= '</div>';
 
-            // Check if any bugs were found
-            if ( $bug_items ) {
-                $output .= '<tr><th style="width:80px">ID</th>';
-                $output .= '<th style="width: 300px">';
-                $output .= 'Title / Desc </th><th>Version</th></tr>'; 
+    echo $output;
 
-                // Create a row in table for each bug
-                foreach ( $bug_items as $bug_item ) {
-                    $output .= '<tr style="background: #FFF">';
-                    $output .= '<td>' . $bug_item['bug_id'] . '</td>';
-                    $output .= '<td>' . $bug_item['bug_title'] . '</td>';
-                    $output .= '<td>' . $bug_item['bug_version'];
-                    $output .= '</td></tr>';
-                    $output .= '<tr><td colspan="2">';
-                    $output .= $bug_item['bug_description'];
-                    $output .= '</td></tr>';
-                }
-            } else {
-                // Message displayed if no bugs are found
-                $output .= '<tr style="background: #FFF">';
-                $output .= '<td colspan="3">No Bugs to Display</td></tr>';
-            }
-            
-            $output .= '</table></div><br />';
-
-            if ( isset( $_POST['firstName']) && trim($_POST['firstName']) !="") {
-
-                $output .= "first name is present " . $_POST['firstName'];
-            } else {
-                $output .= "first name is not present" . $_POST['firstName'];
-            }
-
-            echo $output;
-         }
-
-         die();
+    die();
 }
 
 // register a function to be called when scripts are being queued up
