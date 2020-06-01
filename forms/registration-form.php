@@ -56,7 +56,7 @@ function rcMC_registration_form() {
     $output .= '   <label for="acknowledge">I have read and understand the <a href="#">terms of use</a> and <a href="#">privacy
                 policy</a></label>';
     $output .= '</div>';
-    $output .= '<input type="submit" name="submit" id="submit" value="Sign up">';
+    $output .= '<button type="button" name="submit" id="submit" class="get_submission_results">Sign Up</button>';    
     $output .= '</form><br />';
 
     $output .= '<a class="get_submission_results">';
