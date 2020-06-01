@@ -97,7 +97,22 @@ function rcMC_registration_form() {
     $nonce = wp_create_nonce( 'rcMC_ajax' );
     
     $output .= 'function replacecontent ( bug_status )' .
-               '{ jQuery.ajax( { ' .
+               '{ ' .
+                
+                //assign input data to variables
+               ' var firstName = jQuery("#firstName").val();' .    
+               ' var lastName = jQuery("#lastName").val();' . 
+               ' var email = jQuery("#email").val();' .  
+               ' var acknowledge = jQuery("#acknowledge").prop("checked") ? jQuery("#acknowledge").val() : "0";' .
+                             
+               // print variable to console
+               ' console.log("first name is: " + firstName); ' .
+               ' console.log("last name is: " + lastName); ' .
+               ' console.log("email is: " + email); ' .
+               ' console.log("acknowledge is: " + acknowledge); ' .
+               
+               // call ajax
+               '   jQuery.ajax( { ' .
                '    type: "POST",' .
                '    url: ajax_url, ' .
                '    data: { action: "rcMC_buglist_ajax", ' .
