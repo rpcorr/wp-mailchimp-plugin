@@ -29,6 +29,10 @@ function rcMC_registration_form() {
                 policy</a></label>';
     $output .= '</div>';
     $output .= '<input type="button" name="submit" id="submit" class="get_submission_results" value="Sign Up" />';    
+    $output .= '<div id="wait" style="margin-top:15px;">';
+    $output .= '   <p><img src="' . plugin_dir_url( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16" border="0" style="margin-right:5px;">Form is
+currently processing...please wait.</p>';
+    $output .= '</div>';
     $output .= '</form><br />';
 
     $output .= '<div class="show_submission_results">'; 
