@@ -3,35 +3,7 @@
 add_shortcode( 'registration_form', 'rcMC_registration_form' );
 
 function rcMC_registration_form() {
-    global $wpdb;
-
-    if ( !empty( $_GET['searchbt'] ) ) {
-        $search_string = $_GET['searchbt'];
-        $search_mode = true;
-    } else {
-        $search_string = "Search...";
-        $search_mode = false;
-    }
-
-    // Prepare query to retreive bugs from database
-    $bug_query = 'select * from ' . $wpdb->get_blog_prefix();
-    $bug_query .= 'ch7_bug_data ';
-    $bug_query .= 'where bug_status = 0 ';
-
-    // Add search string in query if present
-    if ( $search_mode ) {
-        $search_term = '%'. $search_string . '%';
-        $bug_query .= "and bug_title like '%s' ";
-        $bug_query .= "or bug_description like '%s' ";
-    } else {
-        $search_term = '';
-    }
     
-    $bug_query .= 'ORDER by bug_id DESC';
-    $bug_items = $wpdb->get_results( $wpdb->prepare( $bug_query,
-                                     $search_term, $search_term ),
-                                     ARRAY_A );
-
     // Prepare output to be returned to replace shortcode
     $output = '';
 
