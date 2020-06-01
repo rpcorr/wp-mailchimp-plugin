@@ -74,6 +74,9 @@ currently processing...please wait.</p>';
                '};';
                
     $output .= 'jQuery( document ).ready( function () {';
+    // hide the spinner initially
+    $output .= 'jQuery("#wait").css("display", "none");';
+    // call replaceContent function on button click
     $output .= 'jQuery(".get_submission_results").click( function()
                                         { replaceContent(); } ';
     $output .= ')});';
