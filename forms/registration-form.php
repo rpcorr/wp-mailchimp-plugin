@@ -61,32 +61,7 @@ function rcMC_registration_form() {
 
     $output .= '<div class="show_submission_results">'; 
     
-    $output .= '<table>';
-    
-    // Check if any bugs were found
-    if ( !empty( $bug_items ) ) {
-        $output .= '<tr><th style="width: 80px">ID</th>';
-        $output .= '<th style="width: 300px">Title / Desc</th>';
-        $output .= '<th>Version</th></tr>';
-
-        // Create row in table for each bug
-        foreach ( $bug_items as $bug_item ) {
-            $output .= '<tr style="background: #FFF">';
-            $output .= '<td>' . $bug_item['bug_id'] . '</td>';
-            $output .= '<td>' . $bug_item['bug_title'] . '</td>';
-            $output .= '<td>' . $bug_item['bug_version'];
-            $output .= '</td></tr>';
-            $output .= '<tr><td></td><td colspan="2">';
-            $output .= $bug_item['bug_description'];
-            $output .= '</td></tr>';
-        }
-    } else {
-        // Message displayed if no bugs are found
-        $output .= '<tr style="background: #FFF">';
-        $output .= '<td colspan=3>No Bugs to Display</td>';
-    }
-
-    $output .= '</table></div><br />';
+    $output .= '</div><br />';
 
     $output .= '<script type="text/javascript">';
     
