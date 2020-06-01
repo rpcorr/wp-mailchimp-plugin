@@ -119,6 +119,7 @@ function rcMC_registration_form() {
                '    url: ajax_url, ' .
                '    data: { action: "rcMC_buglist_ajax", ' .
                '            _ajax_nonce: "' .  $nonce . '", ' .
+               '            firstName: firstName, ' .
                '            bug_status: bug_status }, ' .
                '    success: function ( data ) {' .
                '             jQuery(".show_submission_results").html( data ); ' .
@@ -199,6 +200,13 @@ function rcMC_buglist_ajax() {
             }
             
             $output .= '</table></div><br />';
+
+            if ( isset( $_POST['firstName']) && trim($_POST['firstName']) !="") {
+
+                $output .= "first name is present " . $_POST['firstName'];
+            } else {
+                $output .= "first name is not present" . $_POST['firstName'];
+            }
 
             echo $output;
          }
