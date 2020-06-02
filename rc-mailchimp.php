@@ -127,5 +127,12 @@ function rcMC_admin_init() {
     exit;
  }
 
- //include registration form
+//include custom styles for the plugin
+add_action( 'wp_enqueue_scripts', 'rcMC_stylesheet' );
+
+function rcMC_stylesheet() {
+	wp_enqueue_style( 'prefix-style', plugins_url('styles/styles.css', __FILE__) );
+}
+
+//include registration form
 require_once 'forms/registration-form.php';
