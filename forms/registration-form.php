@@ -11,26 +11,27 @@ function rcMC_registration_form() {
 
     $output .= '<h2>Be the first to know!</h2>';
     $output .= '<p>Join our mailing list to receive the latest news.</p>';
-    $output .= '<div style="margin-bottom:15px;">';
-    $output .= '   <label for="firstName">First Name</label>';
-    $output .= '   <input type="text" name="firstName" id="firstName" placeholder="First Name">';
+    $output .= '<p class="errorMessage">Form is incomplete.  Please address the following issue(s):</p>';
+    $output .= '<div>';
+    $output .= '   <label for="firstName">First Name <span id="firstNameError" class="errorMessage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is missing</span></label>';
+    $output .= '   <input type="text" name="firstName" id="firstName" placeholder="First Name" class="errorMessage">';
     $output .= '</div>';
-    $output .= '<div style="margin-bottom:15px;">';
-    $output .= '   <label for="lastName">Last Name</label>';
-    $output .= '   <input type="text" name="lastName" id="lastName" placeholder="Last Name">';
-    $outout .= '</div>';
-    $output .= '<div style="margin-bottom:15px;">';
-    $output .= '   <label for="email">Email Address</label>';
-    $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com">';
+    $output .= '<div>';
+    $output .= '   <label for="lastName">Last Name <span id="lastNameError" class="errorMessage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is missing</span></label>';
+    $output .= '   <input type="text" name="lastName" id="lastName" placeholder="Last Name" class="errorMessage">';
     $output .= '</div>';
-    $output .= '<div style="margin-bottom:15px;">';
-    $output .= '   <input type="checkbox" name="acknowledge" id="acknowledge" style="float:left; margin-top: 5px;">';
+    $output .= '<div>';
+    $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is missing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;does not match required format</span></label>';
+    $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com" class="errorMessage">';
+    $output .= '</div>';
+    $output .= '<div>';
+    $output .= '   <input type="checkbox" name="acknowledge" id="acknowledge">';
     $output .= '   <label for="acknowledge">I have read and understand the <a href="#">terms of use</a> and <a href="#">privacy
                 policy</a></label>';
     $output .= '</div>';
     $output .= '<input type="button" name="submit" id="submit" class="get_submission_results" value="Sign Up" />';    
-    $output .= '<div id="wait" style="margin-top:15px;">';
-    $output .= '   <p><img src="' . plugin_dir_url( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16" border="0" style="margin-right:5px;">Form is
+    $output .= '<div id="wait">';
+    $output .= '   <p><img src="' . plugin_dir_url( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16" border="0">Form is
 currently processing...please wait.</p>';
     $output .= '</div>';
     $output .= '</form><br />';
