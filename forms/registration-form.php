@@ -18,7 +18,7 @@ function rcMC_registration_form() {
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <label for="lastName">Last Name <span id="lastNameError" class="errorMessage"></span></label>';
-    $output .= '   <input type="text" name="lastName" id="lastName" placeholder="Last Name" class="errorMessage">';
+    $output .= '   <input type="text" name="lastName" id="lastName" placeholder="Last Name">';
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"></span></label>';
@@ -81,12 +81,23 @@ currently processing...please wait.</p>';
     $output .= 'jQuery(".get_submission_results").click( function() { ' .
 
                      // check for errors
+                     
+                     // first name
                '     if (jQuery("#firstName").val() === "" ) { ' .
                '        jQuery("#firstName").addClass("errorMessage"); ' .
                '        jQuery("#firstNameError").text(" is missing "); ' .
                '     } else {' . 
                '        jQuery("#firstName").removeClass("errorMessage");  ' .
                '        jQuery("#firstNameError").text(""); ' .
+               '     }' .
+
+                     // last name
+               '     if (jQuery("#lastName").val() === "" ) { ' .
+               '        jQuery("#lastName").addClass("errorMessage"); ' .
+               '        jQuery("#lastNameError").text(" is missing "); ' .
+               '     } else {' . 
+               '        jQuery("#lastName").removeClass("errorMessage");  ' .
+               '        jQuery("#lastNameError").text(""); ' .
                '     }' .
         
                '     replaceContent(); } ' .
