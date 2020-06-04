@@ -67,7 +67,9 @@ currently processing...please wait.</p>';
                '    url: ajax_url, ' .
                '    data: { action: "rcMC_register_user_ajax", ' .
                '            _ajax_nonce: "' .  $nonce . '", ' .
-               '            firstName: firstName }, ' .
+               '            firstName: firstName, ' .
+               '            lastName: lastName ' .
+               '          }, ' .
                '    success: function ( data ) {' .
                '             jQuery(".show_submission_results").html( data ); ' .
                '             }' .
@@ -196,9 +198,17 @@ function rcMC_register_user_ajax() {
     $output .= "<br/>";
         
         if ( isset( $_POST['firstName']) && trim($_POST['firstName']) !="") {
-            $output .= "first name is present " . $_POST['firstName'];
+            $output .= 'first name is present ' . trim($_POST['firstName']);
         } else {
-            $output .= "first name is not present" . $_POST['firstName'];
+            $output .= 'first name is not present' . trim($_POST['firstName']);
+        }
+
+        $output .= '<br>';
+        
+        if ( isset( $_POST['lastName']) && trim($_POST['lastName']) !="") {
+            $output .= 'last name is present ' . trim($_POST['lastName']);
+        } else {
+            $output .= 'last name is not present' . trim($_POST['lastName']);
         }
 
     $output .= '</div>';
