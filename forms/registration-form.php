@@ -13,15 +13,15 @@ function rcMC_registration_form() {
     $output .= '<p>Join our mailing list to receive the latest news.</p>';
     $output .= '<p class="errorMessage">Form is incomplete.  Please address the following issue(s):</p>';
     $output .= '<div>';
-    $output .= '   <label for="firstName">First Name <span id="firstNameError" class="errorMessage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is missing</span></label>';
-    $output .= '   <input type="text" name="firstName" id="firstName" placeholder="First Name" class="errorMessage">';
+    $output .= '   <label for="firstName">First Name <span id="firstNameError" class="errorMessage"></span></label>';
+    $output .= '   <input type="text" name="firstName" id="firstName" placeholder="First Name">';
     $output .= '</div>';
     $output .= '<div>';
-    $output .= '   <label for="lastName">Last Name <span id="lastNameError" class="errorMessage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is missing</span></label>';
+    $output .= '   <label for="lastName">Last Name <span id="lastNameError" class="errorMessage"></span></label>';
     $output .= '   <input type="text" name="lastName" id="lastName" placeholder="Last Name" class="errorMessage">';
     $output .= '</div>';
     $output .= '<div>';
-    $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is missing &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;does not match required format</span></label>';
+    $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"></span></label>';
     $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com" class="errorMessage">';
     $output .= '</div>';
     $output .= '<div>';
@@ -78,8 +78,18 @@ currently processing...please wait.</p>';
     // hide the spinner initially
     $output .= 'jQuery("#wait").css("display", "none");';
     // call replaceContent function on button click
-    $output .= 'jQuery(".get_submission_results").click( function()
-                                        { replaceContent(); } ' .
+    $output .= 'jQuery(".get_submission_results").click( function() { ' .
+
+                     // check for errors
+               '     if (jQuery("#firstName").val() === "" ) { ' .
+               '        jQuery("#firstName").addClass("errorMessage"); ' .
+               '        jQuery("#firstNameError").text(" is missing "); ' .
+               '     } else {' . 
+               '        jQuery("#firstName").removeClass("errorMessage");  ' .
+               '        jQuery("#firstNameError").text(""); ' .
+               '     }' .
+        
+               '     replaceContent(); } ' .
                ');';
 
     // run when AJAX is poccessing
