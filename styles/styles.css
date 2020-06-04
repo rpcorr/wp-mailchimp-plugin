@@ -16,7 +16,11 @@
 
 #registration-form input[type="text"]:focus {
     background-color: lightblue;
-  }
+}
+
+#registration-form p.errorMessage {
+    display: none;
+}
 
 #registration-form span.errorMessage, #registration-form p.errorMessage { 
     color: #FF0000;
