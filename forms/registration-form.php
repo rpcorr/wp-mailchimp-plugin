@@ -217,12 +217,8 @@ function rcMC_register_user_ajax() {
         $output .= '<br>';
         
         if ( isset( $_POST['email'] ) && trim($_POST['email'] ) != "") {
-
-            // Determine email string length after last period. result must be 2 or 3
-            $lastPeriodInEmail = strrpos(trim($_POST['email']), '.');
-            $strLenAfterPeriod = strlen(substr(trim($_POST['email']), $lastPeriodInEmail) ) - 1;
             
-            if ((filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) == false ) || $strLenAfterPeriod != 2 && $strLenAfterPeriod != 3 ) {
+            if ((filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) == false ) || !isEmailSuffixOK($_POST['email']) ) {
                 $output .= 'email does not match required format ';
             } else {
                 $output .= 'email is: ' . trim($_POST['email']);
@@ -244,4 +240,18 @@ add_action( 'wp_enqueue_scripts', 'rcMC_load_jquery' );
 // implement rcMC_load_jquery
 function rcMC_load_jquery() {
     wp_enqueue_script( 'jquery' );
+}
+
+// isEmailSuffixOK function
+function isEmailSuffixOK( $email ) {
+    
+    // retrieve email suffix length
+    $emailSuffixLen = strlen(substr(trim($email), strrpos(trim($email), '.')) ) - 1;
+    
+    // Determine email suffix length is valid; result must be 2 or 3
+    if ( $emailSuffixLen === 2 || $emailSuffixLen === 3 ) {
+        return true;
+    } else {
+        return false;
+    }
 }
