@@ -82,35 +82,50 @@ currently processing...please wait.</p>';
 
                      // check for errors
                      
-                     // first name
+                     //  handle first name errors
                '     if (jQuery.trim(jQuery("#firstName").val()) === "" ) { ' .
+                        // add errorMessage class and display firstName error message
                '        jQuery("#firstName").addClass("errorMessage"); ' .
                '        jQuery("#firstNameError").text(" is missing "); ' .
                '        jQuery("#firstName").val("");' .
-               '     } else {' . 
+               '     } else {' .
+                        // remove white spaces from firstName textbox value
+               '        jQuery("#firstName").val(jQuery("#firstName").val().replace(/\s+/g," ")); ' .
+                        // remove firstName errorMessage class and text
                '        jQuery("#firstName").removeClass("errorMessage");  ' .
                '        jQuery("#firstNameError").text(""); ' .
                '     }' .
 
-                     // last name
+                     // handle last name errors
                '     if (jQuery.trim(jQuery("#lastName").val()) === "" ) { ' .
+                        // add errorMessage class and display lastName error message
                '        jQuery("#lastName").addClass("errorMessage"); ' .
                '        jQuery("#lastNameError").text(" is missing "); ' .
                '        jQuery("#lastName").val("");' .
-               '     } else {' . 
+               '     } else {' .
+                        // remove white spaces from lastName textbox value
+               '        jQuery("#lastName").val(jQuery("#lastName").val().replace(/\s+/g," ")); ' .
+                        // remove lastName errorMessage class and text
                '        jQuery("#lastName").removeClass("errorMessage");  ' .
                '        jQuery("#lastNameError").text(""); ' .
                '     }' .
 
-                     // email
+                     // handle email errors
                '     if (jQuery.trim(jQuery("#email").val()) === "" ) { ' .
+                        // add errorMessage class and display email error message for empty email value
                '        jQuery("#email").addClass("errorMessage"); ' .
                '        jQuery("#emailError").text(" is missing "); ' .
                '        jQuery("#email").val("");' .
-               '     } else if ( !isEmail(jQuery("#email").val())) {' .
+               '     } else if ( !isEmail(jQuery("#email").val().replace(/\s+/g,""))) {' .
+                        // remove white spaces from email textbox value
+               '        jQuery("#email").val(jQuery("#email").val().replace(/\s+/g,"")); ' .
+                        // add errorMessage class and display email error message for invalid email format
                '        jQuery("#email").addClass("errorMessage"); ' .
                '        jQuery("#emailError").text(" does not match required format "); ' .
-               '     } else {' . 
+               '     } else {' .
+                        // remove white spaces from email textbox value
+               '        jQuery("#email").val(jQuery("#email").val().replace(/\s+/g,"")); ' .
+                        // remove email errorMessage class and text
                '        jQuery("#email").removeClass("errorMessage");  ' .
                '        jQuery("#emailError").text(""); ' .
                '     }' .
