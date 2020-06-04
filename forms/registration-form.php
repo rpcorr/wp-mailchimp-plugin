@@ -83,27 +83,30 @@ currently processing...please wait.</p>';
                      // check for errors
                      
                      // first name
-               '     if (jQuery("#firstName").val() === "" ) { ' .
+               '     if (jQuery.trim(jQuery("#firstName").val()) === "" ) { ' .
                '        jQuery("#firstName").addClass("errorMessage"); ' .
                '        jQuery("#firstNameError").text(" is missing "); ' .
+               '        jQuery("#firstName").val("");' .
                '     } else {' . 
                '        jQuery("#firstName").removeClass("errorMessage");  ' .
                '        jQuery("#firstNameError").text(""); ' .
                '     }' .
 
                      // last name
-               '     if (jQuery("#lastName").val() === "" ) { ' .
+               '     if (jQuery.trim(jQuery("#lastName").val()) === "" ) { ' .
                '        jQuery("#lastName").addClass("errorMessage"); ' .
                '        jQuery("#lastNameError").text(" is missing "); ' .
+               '        jQuery("#lastName").val("");' .
                '     } else {' . 
                '        jQuery("#lastName").removeClass("errorMessage");  ' .
                '        jQuery("#lastNameError").text(""); ' .
                '     }' .
 
                      // email
-               '     if (jQuery("#email").val() === "" ) { ' .
+               '     if (jQuery.trim(jQuery("#email").val()) === "" ) { ' .
                '        jQuery("#email").addClass("errorMessage"); ' .
                '        jQuery("#emailError").text(" is missing "); ' .
+               '        jQuery("#email").val("");' .
                '     } else if ( !isEmail(jQuery("#email").val())) {' .
                '        jQuery("#email").addClass("errorMessage"); ' .
                '        jQuery("#emailError").text(" does not match required format "); ' .
