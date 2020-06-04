@@ -68,7 +68,8 @@ currently processing...please wait.</p>';
                '    data: { action: "rcMC_register_user_ajax", ' .
                '            _ajax_nonce: "' .  $nonce . '", ' .
                '            firstName: firstName, ' .
-               '            lastName: lastName ' .
+               '            lastName: lastName, ' .
+               '            email: email ' .
                '          }, ' .
                '    success: function ( data ) {' .
                '             jQuery(".show_submission_results").html( data ); ' .
@@ -129,14 +130,16 @@ currently processing...please wait.</p>';
                '        jQuery("#emailError").text(" is missing "); ' .
                '        jQuery("#email").val("");' .
                '     } else if ( !isEmail(jQuery("#email").val().replace(/\s+/g,""))) {' .
-                        // hide generic error message
-               '        jQuery("p.errorMessage").css("display", "none");' .
+                        // show generic error message
+               '        jQuery("p.errorMessage").css("display", "block");' .
                         // remove white spaces from email textbox value
                '        jQuery("#email").val(jQuery("#email").val().replace(/\s+/g,"")); ' .
                         // add errorMessage class and display email error message for invalid email format
                '        jQuery("#email").addClass("errorMessage"); ' .
                '        jQuery("#emailError").text(" does not match required format "); ' .
                '     } else {' .
+                        // hide generic error message
+               '        jQuery("p.errorMessage").css("display", "none");' .
                         // remove white spaces from email textbox value
                '        jQuery("#email").val(jQuery("#email").val().replace(/\s+/g,"")); ' .
                         // remove email errorMessage class and text
@@ -197,24 +200,41 @@ function rcMC_register_user_ajax() {
     $output = '<div class="show_submission_results">';
     $output .= "<br/>";
         
-        if ( isset( $_POST['firstName']) && trim($_POST['firstName']) !="") {
-            $output .= 'first name is present ' . trim($_POST['firstName']);
+        if ( isset( $_POST['firstName'] ) && trim( $_POST['firstName'] ) != "") {
+            $output .= 'first name is: ' . trim($_POST['firstName']);
         } else {
-            $output .= 'first name is not present' . trim($_POST['firstName']);
+            $output .= 'first name is missing' . trim($_POST['firstName']);
         }
 
         $output .= '<br>';
         
-        if ( isset( $_POST['lastName']) && trim($_POST['lastName']) !="") {
-            $output .= 'last name is present ' . trim($_POST['lastName']);
+        if ( isset( $_POST['lastName'] ) && trim( $_POST['lastName'] ) != "") {
+            $output .= 'last name is: ' . trim($_POST['lastName']);
         } else {
-            $output .= 'last name is not present' . trim($_POST['lastName']);
+            $output .= 'last name is missing' . trim($_POST['lastName']);
+        }
+
+        $output .= '<br>';
+        
+        if ( isset( $_POST['email'] ) && trim($_POST['email'] ) != "") {
+
+            // Determine email string length after last period. result must be 2 or 3
+            $lastPeriodInEmail = strrpos(trim($_POST['email']), '.');
+            $strLenAfterPeriod = strlen(substr(trim($_POST['email']), $lastPeriodInEmail) ) - 1;
+            
+            if ((filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) == false ) || $strLenAfterPeriod != 2 && $strLenAfterPeriod != 3 ) {
+                $output .= 'email does not match required format ';
+            } else {
+                $output .= 'email is: ' . trim($_POST['email']);
+            }
+        } else {
+            $output .= 'email is missing' . trim($_POST['email']);
         }
 
     $output .= '</div>';
 
     echo $output;
-
+    
     die();
 }
 
