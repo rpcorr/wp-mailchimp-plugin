@@ -22,7 +22,7 @@ function rcMC_registration_form() {
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"></span></label>';
-    $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com" class="errorMessage">';
+    $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com">';
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <input type="checkbox" name="acknowledge" id="acknowledge">';
@@ -99,9 +99,27 @@ currently processing...please wait.</p>';
                '        jQuery("#lastName").removeClass("errorMessage");  ' .
                '        jQuery("#lastNameError").text(""); ' .
                '     }' .
+
+                     // email
+               '     if (jQuery("#email").val() === "" ) { ' .
+               '        jQuery("#email").addClass("errorMessage"); ' .
+               '        jQuery("#emailError").text(" is missing "); ' .
+               '     } else if ( !isEmail(jQuery("#email").val())) {' .
+               '        jQuery("#email").addClass("errorMessage"); ' .
+               '        jQuery("#emailError").text(" does not match required format "); ' .
+               '     } else {' . 
+               '        jQuery("#email").removeClass("errorMessage");  ' .
+               '        jQuery("#emailError").text(""); ' .
+               '     }' .
         
                '     replaceContent(); } ' .
                ');';
+
+    // email validation function
+    $output .= 'function isEmail(email) {' .
+                '   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;' .
+                '   return regex.test(email); ' .
+                '}';
 
     // run when AJAX is poccessing
     $output .= 'jQuery(document).ajaxStart(function () { ' .
