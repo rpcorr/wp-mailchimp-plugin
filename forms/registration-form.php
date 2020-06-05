@@ -53,13 +53,6 @@ currently processing...please wait.</p>';
                ' var email = jQuery("#email").val();' .  
                ' var acknowledge = jQuery("#acknowledge").prop("checked") ? jQuery("#acknowledge").val() : "0";' .
                ' var submit = jQuery("#submit").val();' .
-                             
-               // print variable to console
-               ' console.log("first name is: " + firstName); ' .
-               ' console.log("last name is: " + lastName); ' .
-               ' console.log("email is: " + email); ' .
-               ' console.log("acknowledge is: " + acknowledge); ' .
-               ' console.log("submit is: " + submit); ' .
                
                // call ajax
                '   jQuery.ajax( { ' .
