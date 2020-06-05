@@ -85,15 +85,11 @@ currently processing...please wait.</p>';
                      
                      //  handle first name errors
                '     if (jQuery.trim(jQuery("#firstName").val()) === "" ) { ' .
-                        // show generic error message
-               '        jQuery("p.errorMessage").css("display", "block");' .
                         // add errorMessage class and display firstName error message
                '        jQuery("#firstName").addClass("errorMessage"); ' .
                '        jQuery("#firstNameError").text(" is missing "); ' .
                '        jQuery("#firstName").val("");' .
                '     } else {' .
-                        // hide generic error message
-               '        jQuery("p.errorMessage").css("display", "none");' .
                         // remove white spaces from firstName textbox value
                '        jQuery("#firstName").val(jQuery("#firstName").val().replace(/\s+/g," ")); ' .
                         // remove firstName errorMessage class and text
@@ -103,15 +99,11 @@ currently processing...please wait.</p>';
 
                      // handle last name errors
                '     if (jQuery.trim(jQuery("#lastName").val()) === "" ) { ' .
-                        // show generic error message
-               '        jQuery("p.errorMessage").css("display", "block");' .
                         // add errorMessage class and display lastName error message
                '        jQuery("#lastName").addClass("errorMessage"); ' .
                '        jQuery("#lastNameError").text(" is missing "); ' .
                '        jQuery("#lastName").val("");' .
                '     } else {' .
-                        // hide generic error message
-               '        jQuery("p.errorMessage").css("display", "none");' .
                         // remove white spaces from lastName textbox value
                '        jQuery("#lastName").val(jQuery("#lastName").val().replace(/\s+/g," ")); ' .
                         // remove lastName errorMessage class and text
@@ -121,23 +113,18 @@ currently processing...please wait.</p>';
 
                      // handle email errors
                '     if (jQuery.trim(jQuery("#email").val()) === "" ) { ' .
-                        // show generic error message
-               '        jQuery("p.errorMessage").css("display", "block");' .
                         // add errorMessage class and display email error message for empty email value
                '        jQuery("#email").addClass("errorMessage"); ' .
                '        jQuery("#emailError").text(" is missing "); ' .
                '        jQuery("#email").val("");' .
                '     } else if ( !isEmail(jQuery("#email").val().replace(/\s+/g,""))) {' .
-                        // show generic error message
-               '        jQuery("p.errorMessage").css("display", "block");' .
                         // remove white spaces from email textbox value
                '        jQuery("#email").val(jQuery("#email").val().replace(/\s+/g,"")); ' .
                         // add errorMessage class and display email error message for invalid email format
                '        jQuery("#email").addClass("errorMessage"); ' .
                '        jQuery("#emailError").text(" does not match required format "); ' .
                '     } else {' .
-                        // hide generic error message
-               '        jQuery("p.errorMessage").css("display", "none");' .
+               
                         // remove white spaces from email textbox value
                '        jQuery("#email").val(jQuery("#email").val().replace(/\s+/g,"")); ' .
                         // remove email errorMessage class and text
@@ -154,8 +141,12 @@ currently processing...please wait.</p>';
                 '         !isEmail(jQuery("#email").val().replace(/\s+/g,""))  '  . 
                 '     )' .
                 '     { ' . 
+                         // show generic error message
+                '        jQuery("p.errorMessage").css("display", "block"); ' .
                 '            bError = true; ' . 
                 '     }  else { ' .
+                         // hide generic error message
+                '        jQuery("p.errorMessage").css("display", "none"); ' .
                 '            bError = false; ' . 
                 '     } ' .
                
