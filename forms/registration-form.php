@@ -158,11 +158,17 @@ currently processing...please wait.</p>';
 
     // run when AJAX is poccessing
     $output .= 'jQuery(document).ajaxStart(function () { ' .
+                // disable the submit button
+               '   jQuery("#submit").attr("disabled", true); ' .
+               // show the spinner
                '   jQuery("#wait").css("display", "block"); ' .
                '});';
 
     // run when AJAX is completed
     $output .= 'jQuery(document).ajaxComplete(function () { ' .
+               // enable the submit button
+               '   jQuery("#submit").attr("disabled", false); ' .
+               // hide the spinner
                '   jQuery("#wait").css("display", "none"); ' .
                '});';
     
