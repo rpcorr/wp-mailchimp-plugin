@@ -22,7 +22,7 @@ function rcMC_registration_form() {
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"></span></label>';
-    $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com" required>';
+    $output .= '   <input type="email" name="email" id="email" placeholder="name@domain.com" required>';
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <input type="checkbox" name="acknowledge" id="acknowledge">';
