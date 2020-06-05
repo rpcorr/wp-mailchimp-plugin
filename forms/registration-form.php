@@ -14,15 +14,15 @@ function rcMC_registration_form() {
     $output .= '<p class="errorMessage">Form is incomplete.  Please address the following issue(s):</p>';
     $output .= '<div>';
     $output .= '   <label for="firstName">First Name <span id="firstNameError" class="errorMessage"></span></label>';
-    $output .= '   <input type="text" name="firstName" id="firstName" placeholder="First Name">';
+    $output .= '   <input type="text" name="firstName" id="firstName" placeholder="First Name" required>';
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <label for="lastName">Last Name <span id="lastNameError" class="errorMessage"></span></label>';
-    $output .= '   <input type="text" name="lastName" id="lastName" placeholder="Last Name">';
+    $output .= '   <input type="text" name="lastName" id="lastName" placeholder="Last Name" required>';
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"></span></label>';
-    $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com">';
+    $output .= '   <input type="text" name="email" id="email" placeholder="name@domain.com" required>';
     $output .= '</div>';
     $output .= '<div>';
     $output .= '   <input type="checkbox" name="acknowledge" id="acknowledge">';
