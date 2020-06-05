@@ -200,6 +200,10 @@ add_action( 'wp_ajax_nopriv_rcMC_register_user_ajax', 'rcMC_register_user_ajax' 
 
 // implement rcMC_register_user_ajax function
 function rcMC_register_user_ajax() {
+
+    //delay the server-side process by 1 second
+    sleep(1);
+    
     check_ajax_referer( 'rcMC_ajax' );
 
     // Prepare output to be returned to AJAX requestor
