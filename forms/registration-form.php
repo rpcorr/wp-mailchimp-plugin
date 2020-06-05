@@ -44,7 +44,7 @@ currently processing...please wait.</p>';
     
     $nonce = wp_create_nonce( 'rcMC_ajax' );
     
-    $output .= 'function replaceContent ()' .
+    $output .= 'function replaceContent (bError)' .
                '{ ' .
                 
                 //assign input data to variables
@@ -73,7 +73,12 @@ currently processing...please wait.</p>';
                '          }, ' .
                '    success: function ( data ) {' .
                '             jQuery(".show_submission_results").html( data ); ' .
-               '             }' .
+                            
+                            // clear form if there are no errors
+               '            if (bError === false) { ' .
+               '                jQuery("#registration-form")["0"].reset(); ' .
+               '            } ' . 
+               '          }' .
                '    });' .
                '};';
                
@@ -146,8 +151,22 @@ currently processing...please wait.</p>';
                '        jQuery("#email").removeClass("errorMessage");  ' .
                '        jQuery("#emailError").text(""); ' .
                '     }' .
-        
-               '     replaceContent(); } ' .
+                      
+                      // determine value for bError to pass along into replaceContent function
+                      // to clear the form or not 
+                '     var bError;' .
+
+                '     if (jQuery.trim(jQuery("#firstName").val()) === "" ||  '  .
+                '         jQuery.trim(jQuery("#lastName").val()) === ""  || '  . 
+                '         !isEmail(jQuery("#email").val().replace(/\s+/g,""))  '  . 
+                '     )' .
+                '     { ' . 
+                '            bError = true; ' . 
+                '     }  else { ' .
+                '            bError = false; ' . 
+                '     } ' .
+               
+               '     replaceContent(bError); } ' .
                ');';
 
     // email validation function
