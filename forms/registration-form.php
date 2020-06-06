@@ -134,7 +134,7 @@ currently processing...please wait.</p>';
                       
                       // determine value for bError to pass along into replaceContent function
                       // to clear the form or not 
-                '     var bError;' .
+                '     var bError = false;' .
 
                 '     if (jQuery.trim(jQuery("#firstName").val()) === "" ||  '  .
                 '         jQuery.trim(jQuery("#lastName").val()) === ""  || '  . 
@@ -209,35 +209,35 @@ function rcMC_register_user_ajax() {
     
     check_ajax_referer( 'rcMC_ajax' );
 
+    //create a boolean to check if form fields are valid or not
+    $bError = false;
+
     // Prepare output to be returned to AJAX requestor
     $output = '<div class="show_submission_results">';
     $output .= "<br/>";
         
-        if ( isset( $_POST['firstName'] ) && trim( $_POST['firstName'] ) != "") {
-            $output .= 'first name is: ' . trim($_POST['firstName']);
-        } else {
-            $output .= 'first name is missing' . trim($_POST['firstName']);
+        // check first name
+        if ( isset( $_POST['firstName'] ) && trim( $_POST['firstName'] ) === "") {
+            $bError = true;
         }
-
-        $output .= '<br>';
         
-        if ( isset( $_POST['lastName'] ) && trim( $_POST['lastName'] ) != "") {
-            $output .= 'last name is: ' . trim($_POST['lastName']);
-        } else {
-            $output .= 'last name is missing' . trim($_POST['lastName']);
+        // check last name
+        if ( isset( $_POST['lastName'] ) && trim( $_POST['lastName'] ) === "") {
+            $bError = true;
         }
-
-        $output .= '<br>';
         
         if ( isset( $_POST['email'] ) && trim($_POST['email'] ) != "") {
             
             if ((filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) == false ) || !isEmailSuffixOK($_POST['email']) ) {
-                $output .= 'email does not match required format ';
-            } else {
-                $output .= 'email is: ' . trim($_POST['email']);
+                $bError = true;
             }
         } else {
-            $output .= 'email is missing' . trim($_POST['email']);
+            $bError = true;
+        }
+        
+        //check to see if bError changed value
+        if ($bError === false) {
+            $output .= "Form is all good for submission.";
         }
 
     $output .= '</div>';
