@@ -29,7 +29,7 @@ function rcMC_registration_form() {
     $output .= '   <label for="acknowledge">I have read and understand the <a href="#">terms of use</a> and <a href="#">privacy
                 policy</a></label>';
     $output .= '</div>';
-    $output .= '<input type="button" name="submit" id="submit" class="get_submission_results" value="Sign Up" />';    
+    $output .= '<input type="button" name="submit" id="submit" class="get-submission-results" value="Sign Up" />';    
     $output .= '<div id="wait">';
     $output .= '   <p><img src="' . plugin_dir_url( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16" border="0">Form is
 currently processing...please wait.</p>';
@@ -82,7 +82,7 @@ currently processing...please wait.</p>';
     $output .= 'jQuery("#wait").css("display", "none");';
 
     // call replaceContent function on button click
-    $output .= 'jQuery(".get_submission_results").click( function() { ' .
+    $output .= 'jQuery(".get-submission-results").click( function() { ' .
 
                 // hide the submission results div
                 '   jQuery(".submission-results").css("display", "none"); ' .
@@ -278,7 +278,7 @@ function rcMC_register_user_ajax() {
         $data = array($_POST['email'], $_POST['firstName'], $_POST['lastName']);
     
         // subscribe user to list and return the result
-        $output .= $mc->subscribeToList($data);
+        $output = $mc->subscribeToList($data);
 
         echo $output;
     }
