@@ -34,3 +34,10 @@
 #registration-form img {
     margin-right: 5px;
 }
+
+.submission-results {
+    display: none;
+    border: 1px solid #28a745; 
+    background-color:#34ce57; 
+    padding:10px; color:#ffffff;
+}
