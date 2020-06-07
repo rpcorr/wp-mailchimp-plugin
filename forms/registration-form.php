@@ -89,6 +89,11 @@ currently processing...please wait.</p>';
                '        jQuery("#firstName").addClass("errorMessage"); ' .
                '        jQuery("#firstNameError").text(" is missing "); ' .
                '        jQuery("#firstName").val("");' .
+               '     } else if ( !lettersAndWhiteSpacesOnly( jQuery.trim(jQuery("#firstName").val())) ) {' .
+                        // add errorMessage class and display firstName error message when text contains
+                        // characters other than letters and whitespaces
+               '        jQuery("#firstName").addClass("errorMessage"); ' .
+               '        jQuery("#firstNameError").text(" only accepts letters and whitespaces "); ' .                  
                '     } else {' .
                         // remove white spaces from firstName textbox value
                '        jQuery("#firstName").val(jQuery("#firstName").val().replace(/\s+/g," ")); ' .
@@ -99,10 +104,15 @@ currently processing...please wait.</p>';
 
                      // handle last name errors
                '     if (jQuery.trim(jQuery("#lastName").val()) === "" ) { ' .
-                        // add errorMessage class and display lastName error message
+                        // add errorMessage class and display lastName error message when text is missing
                '        jQuery("#lastName").addClass("errorMessage"); ' .
                '        jQuery("#lastNameError").text(" is missing "); ' .
                '        jQuery("#lastName").val("");' .
+               '     } else if ( !lettersAndWhiteSpacesOnly( jQuery.trim(jQuery("#lastName").val())) ) {' .
+                        // add errorMessage class and display lastName error message when text contains
+                        // characters other than letters and whitespaces
+               '        jQuery("#lastName").addClass("errorMessage"); ' .
+               '        jQuery("#lastNameError").text(" only accepts letters and whitespaces "); ' .
                '     } else {' .
                         // remove white spaces from lastName textbox value
                '        jQuery("#lastName").val(jQuery("#lastName").val().replace(/\s+/g," ")); ' .
@@ -137,19 +147,20 @@ currently processing...please wait.</p>';
                 '     var bError = false;' .
 
                 '     if (jQuery.trim(jQuery("#firstName").val()) === "" ||  '  .
+                '         !lettersAndWhiteSpacesOnly( jQuery.trim(jQuery("#firstName").val()))  || '  . 
                 '         jQuery.trim(jQuery("#lastName").val()) === ""  || '  . 
+                '         !lettersAndWhiteSpacesOnly( jQuery.trim(jQuery("#lastName").val())) || '  . 
                 '         !isEmail(jQuery("#email").val().replace(/\s+/g,""))  '  . 
                 '     )' .
                 '     { ' . 
                          // show generic error message
                 '        jQuery("p.errorMessage").css("display", "block"); ' .
                 '            bError = true; ' . 
-                '     }  else { ' .
+                '     } else { ' .
                          // hide generic error message
                 '        jQuery("p.errorMessage").css("display", "none"); ' .
                 '            bError = false; ' . 
                 '     } ' .
-               
                '     replaceContent(bError); } ' .
                ');';
 
@@ -158,6 +169,12 @@ currently processing...please wait.</p>';
                 '   var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;' .
                 '   return regex.test(email); ' .
                 '}';
+
+    // text field only accepts letters and whitespaces
+    $output .=  'function lettersAndWhiteSpacesOnly(text) { ' .
+                '   var regex = /^[a-zA-Z\s]*$/;' .
+                '   return regex.test(text); ' .
+                '}'; 
 
     // run when AJAX is poccessing
     $output .= 'jQuery(document).ajaxStart(function () { ' .
@@ -217,21 +234,24 @@ function rcMC_register_user_ajax() {
     $output .= "<br/>";
         
         // check first name
-        if ( isset( $_POST['firstName'] ) && trim( $_POST['firstName'] ) === "") {
+        if ( (isset( $_POST['firstName'] ) && trim( $_POST['firstName'] ) === "") || 
+                !lettersAndWhiteSpacesOnly( trim( $_POST['firstName'] ))) {
             $bError = true;
         }
         
         // check last name
-        if ( isset( $_POST['lastName'] ) && trim( $_POST['lastName'] ) === "") {
+        if ( isset( $_POST['lastName'] ) && trim( $_POST['lastName'] ) === "" || 
+                !lettersAndWhiteSpacesOnly( trim( $_POST['lastName'] ))) {
             $bError = true;
         }
         
-        if ( isset( $_POST['email'] ) && trim($_POST['email'] ) != "") {
+        // check email
+        if ( isset( $_POST['email'] ) && trim($_POST['email'] ) != "" ) {
             
             if ((filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) == false ) || !isEmailSuffixOK($_POST['email']) ) {
                 $bError = true;
             }
-        } else {
+        } else if ( isset( $_POST['email'] ) && trim($_POST['email'] ) === "" ) {
             $bError = true;
         }
         
@@ -263,6 +283,15 @@ function isEmailSuffixOK( $email ) {
     
     // Determine email suffix length is valid; result must be 2 or 3
     if ( $emailSuffixLen === 2 || $emailSuffixLen === 3 ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+// check for letters and white spaces only
+function lettersAndWhiteSpacesOnly( $text ) {
+    if (ctype_alpha(str_replace(' ', '', $text)) === true) {
         return true;
     } else {
         return false;
