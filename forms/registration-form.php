@@ -34,9 +34,9 @@ function rcMC_registration_form() {
     $output .= '   <p><img src="' . plugin_dir_url( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16" border="0">Form is
 currently processing...please wait.</p>';
     $output .= '</div>';
-    $output .= '</form><br />';
+    $output .= '</form>';
 
-    $output .= '<div class="show_submission_results">'; 
+    $output .= '<div class="submission-results">'; 
     
     $output .= '</div><br />';
 
@@ -65,21 +65,27 @@ currently processing...please wait.</p>';
                '            email: email ' .
                '          }, ' .
                '    success: function ( data ) {' .
-               '             jQuery(".show_submission_results").html( data ); ' .
+               '             jQuery(".submission-results").html( data ); ' .
                             
-                            // clear form if there are no errors
+                            // clear form if there are no errors and show results
                '            if (bError === false) { ' .
                '                jQuery("#registration-form")["0"].reset(); ' .
+               '                jQuery(".submission-results").css("display", "block"); ' .  
                '            } ' . 
                '          }' .
                '    });' .
                '};';
                
     $output .= 'jQuery( document ).ready( function () {';
+        
     // hide the spinner initially
     $output .= 'jQuery("#wait").css("display", "none");';
+
     // call replaceContent function on button click
     $output .= 'jQuery(".get_submission_results").click( function() { ' .
+
+                // hide the submission results div
+                '   jQuery(".submission-results").css("display", "none"); ' .
 
                      // check for errors
                      
@@ -153,12 +159,15 @@ currently processing...please wait.</p>';
                 '         !isEmail(jQuery("#email").val().replace(/\s+/g,""))  '  . 
                 '     )' .
                 '     { ' . 
-                         // show generic error message
-                '        jQuery("p.errorMessage").css("display", "block"); ' .
-                '            bError = true; ' . 
+                           // show generic error message
+                '           jQuery("p.errorMessage").css("display", "block"); ' .
+                
+                '           jQuery(".submission-results").css("display", "none"); ' .  
+                '           bError = true; ' . 
+                
                 '     } else { ' .
-                         // hide generic error message
-                '        jQuery("p.errorMessage").css("display", "none"); ' .
+                             // hide generic error message
+                '            jQuery("p.errorMessage").css("display", "none"); ' .
                 '            bError = false; ' . 
                 '     } ' .
                '     replaceContent(bError); } ' .
@@ -178,18 +187,24 @@ currently processing...please wait.</p>';
 
     // run when AJAX is poccessing
     $output .= 'jQuery(document).ajaxStart(function () { ' .
+
                 // disable the submit button
                '   jQuery("#submit").attr("disabled", true); ' .
+               
                // show the spinner
                '   jQuery("#wait").css("display", "block"); ' .
+               
                '});';
 
     // run when AJAX is completed
     $output .= 'jQuery(document).ajaxComplete(function () { ' .
+        
                // enable the submit button
                '   jQuery("#submit").attr("disabled", false); ' .
+               
                // hide the spinner
                '   jQuery("#wait").css("display", "none"); ' .
+                
                '});';
     
     $output .= '});';
@@ -229,40 +244,44 @@ function rcMC_register_user_ajax() {
     //create a boolean to check if form fields are valid or not
     $bError = false;
 
-    // Prepare output to be returned to AJAX requestor
-    $output = '<div class="show_submission_results">';
-    $output .= "<br/>";
+    // check first name
+    if ( (isset( $_POST['firstName'] ) && trim( $_POST['firstName'] ) === "") ||
+            !lettersAndWhiteSpacesOnly( trim( $_POST['firstName'] ))) {
+        $bError = true;
+    }
+    
+    // check last name
+    if ( isset( $_POST['lastName'] ) && trim( $_POST['lastName'] ) === "" ||
+            !lettersAndWhiteSpacesOnly( trim( $_POST['lastName'] ))) {
+        $bError = true;
+    }
+    
+    // check email
+    if ( isset( $_POST['email'] ) && trim($_POST['email'] ) != "" ) {
         
-        // check first name
-        if ( (isset( $_POST['firstName'] ) && trim( $_POST['firstName'] ) === "") || 
-                !lettersAndWhiteSpacesOnly( trim( $_POST['firstName'] ))) {
+        if ((filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) == false ) || !isEmailSuffixOK($_POST['email']) ) {
             $bError = true;
         }
-        
-        // check last name
-        if ( isset( $_POST['lastName'] ) && trim( $_POST['lastName'] ) === "" || 
-                !lettersAndWhiteSpacesOnly( trim( $_POST['lastName'] ))) {
-            $bError = true;
-        }
-        
-        // check email
-        if ( isset( $_POST['email'] ) && trim($_POST['email'] ) != "" ) {
-            
-            if ((filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL ) == false ) || !isEmailSuffixOK($_POST['email']) ) {
-                $bError = true;
-            }
-        } else if ( isset( $_POST['email'] ) && trim($_POST['email'] ) === "" ) {
-            $bError = true;
-        }
-        
-        //check to see if bError changed value
-        if ($bError === false) {
-            $output .= "Form is all good for submission.";
-        }
+    } else if ( isset( $_POST['email'] ) && trim($_POST['email'] ) === "" ) {
+        $bError = true;
+    }
+    
+    //check to see if bError changed value
+    if ($bError === false) {
 
-    $output .= '</div>';
+        // Prepare output to be returned to AJAX requestor
+        
+        // create a MailChimp Maintenance object
+        $mc = new mcMaintenance();
 
-    echo $output;
+        //assign data to an array
+        $data = array($_POST['email'], $_POST['firstName'], $_POST['lastName']);
+    
+        // subscribe user to list and return the result
+        $output .= $mc->subscribeToList($data);
+
+        echo $output;
+    }
     
     die();
 }
