@@ -47,13 +47,16 @@ class mcMaintenance {
             'language' => 'en'
         ));
         
-        $msg = $result['detail'];
-        
         if ($result['status'] === 'pending') {
             //alert user that an email confirmation has been sent
-			$msg = "<p>An email has been sent to <strong>" . $result['email_address'] . "</strong> for verification. " .
-            $msg .= "<br/><strong>Please note:</strong> the email may be in your spam folder if you cannot see it in your inbox. <br/>";
-            $msg .= "<br/>Follow the email instructions to subscribe yourself. </p>";
+            $msg = '<h3>Verification is Required</h3>' .
+			       '<p>An email has been sent to <strong>' . $result['email_address'] . '</strong> for verification.</p> ' .
+                   '<p><strong>Please note:</strong> the email may be in your spam folder if you cannot see it in your inbox.</p>' .
+                   '<p>Follow the email instructions to subscribe yourself.</p>';
+        } else if ( $result['title'] == "Member Exists") { 
+            // alert user that s/he is already subscribed to the mailing list
+            $msg = '<h3>Hooray</h3>' .
+			       '<p>You are already subscribed to our mailing list.</p>';
         }
         
         return $msg;
