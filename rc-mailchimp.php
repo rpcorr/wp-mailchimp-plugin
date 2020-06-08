@@ -2,7 +2,7 @@
 /*
 Plugin Name: RC MailChimp
 Plugin URI: 
-Description: A newsletter signup form that subscribe users directly to RC's MailChimp account
+Description: A newsletter signup form that subscribe users directly into a MailChimp account
 Version: 1.1
 Author: Ronan Corr
 Author URI: 
@@ -44,7 +44,7 @@ function rcMC_settings_menu() {
    
     global $options_page;
     
-    $options_page = add_options_page( 'MailChimp Configuration', 'RC MailChimp', 'manage_options',
+    $options_page = add_options_page( 'MailChimp Configuration', 'MailChimp', 'manage_options',
                                       'rcMC-mc', 'rcMC_config_page' ); 
 }
 
