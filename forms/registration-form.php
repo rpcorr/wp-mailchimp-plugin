@@ -29,12 +29,11 @@ function rcMC_registration_form() {
     $output .= '   <p><img src="' . plugin_dir_url( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16" border="0">Form is
 currently processing...please wait.</p>';
     $output .= '</div>';
-    $output .= '</form>';
-
-    $output .= '<div class="submission-results">'; 
     
-    $output .= '</div><br />';
-
+    $output .= '<div class="submission-results">'; 
+    $output .= '</div>';
+    
+    $output .= '</form>';
     $output .= '<script type="text/javascript">';
     
     $nonce = wp_create_nonce( 'rcMC_ajax' );
@@ -264,7 +263,7 @@ function rcMC_register_user_ajax() {
     if ($bError === false) {
 
         // Prepare output to be returned to AJAX requestor
-        
+
         // create a MailChimp Maintenance object
         $mc = new mcMaintenance();
 

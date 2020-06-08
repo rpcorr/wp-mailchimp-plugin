@@ -35,7 +35,7 @@
     margin-right: 5px;
 }
 
-.submission-results {
+#registration-form .submission-results {
     display: none;
     border: 1px solid #28a745; 
     background-color:#34ce57; 
@@ -43,4 +43,4 @@
     color:#ffffff;
 }
 
-.submission-results h3 { color: #ffffff;}
+#registration-form .submission-results h3 { color: #ffffff;}
