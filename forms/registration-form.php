@@ -24,11 +24,6 @@ function rcMC_registration_form() {
     $output .= '   <label for="email">Email Address <span id="emailError" class="errorMessage"></span></label>';
     $output .= '   <input type="email" name="email" id="email" placeholder="name@domain.com" required>';
     $output .= '</div>';
-    $output .= '<div>';
-    $output .= '   <input type="checkbox" name="acknowledge" id="acknowledge">';
-    $output .= '   <label for="acknowledge">I have read and understand the <a href="#">terms of use</a> and <a href="#">privacy
-                policy</a></label>';
-    $output .= '</div>';
     $output .= '<input type="button" name="submit" id="submit" class="get-submission-results" value="Sign Up" />';    
     $output .= '<div id="wait">';
     $output .= '   <p><img src="' . plugin_dir_url( __DIR__ ) . 'images/ajax-loader.gif" alt="Form is processing..." title="Form is processing..." width="16" height="16" border="0">Form is
@@ -51,7 +46,6 @@ currently processing...please wait.</p>';
                ' var firstName = jQuery("#firstName").val();' .    
                ' var lastName = jQuery("#lastName").val();' . 
                ' var email = jQuery("#email").val();' .  
-               ' var acknowledge = jQuery("#acknowledge").prop("checked") ? jQuery("#acknowledge").val() : "0";' .
                ' var submit = jQuery("#submit").val();' .
                
                // call ajax
