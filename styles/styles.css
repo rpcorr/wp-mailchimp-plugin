@@ -39,5 +39,8 @@
     display: none;
     border: 1px solid #28a745; 
     background-color:#34ce57; 
-    padding:10px; color:#ffffff;
+    padding:10px; 
+    color:#ffffff;
 }
+
+.submission-results h3 { color: #ffffff;}
