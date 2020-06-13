@@ -137,7 +137,7 @@ if (esc_html( $options[ 'list_id' ] ) == "0000000000" ) {
             </p>
         </li>
 
-        <li>Add the following shortcode into a page or post: <strong>[registration-form]</strong></li>
+        <li>Add the following shortcode into a page or post: <strong>[registration_form]</strong></li>
     </ol>
 
     <p class="submit"><input type="submit" name="submit" id="submit" class="button-primary" value="Save Changes" />
