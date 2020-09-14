@@ -55,7 +55,7 @@ function rcMC_config_page() {
    
 ?>
 <div id="rcMC-general" class="wrap">
-    <h2>Mail Chimp Settings</h2>
+    <h2>MailChimp Settings</h2>
 
     <?php
     //include admin configuration form
