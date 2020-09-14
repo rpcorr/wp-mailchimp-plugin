@@ -89,7 +89,7 @@ if (esc_html( $options[ 'list_id' ] ) == "0000000000" ) {
         <li>
 
             <p>This plugin requires the API Key to connect the app to MailChimp and a list to work
-                with.&nbsp;&nbsp;Login into Mail Chimp to retrieve the API Key and the list ID.</p>
+                with.&nbsp;&nbsp;Login into MailChimp to retrieve the API Key and the list ID.</p>
 
             <div style="width:410px; float:left; margin-right: 10px;">
                 <p>The API key can be found under &ldquo;Account&rdquo; &rAarr; Click &ldquo;Extra&rdquo;.<br /></p>
